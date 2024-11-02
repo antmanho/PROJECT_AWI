@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival de Jeux - Accueil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .welcome-section {
+            background-color: #f8f8f8;
+            padding: 50px 20px;
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            height: calc(100vh - 150px);
+            margin: 0 auto;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .div1, .div2, .div3, .div4 {
+            width: calc(45% - 5px);
+            height: calc(45% - 5px);
+            box-sizing: border-box;
+            position: relative;
+            margin: 5px;
+        }
+        .div2 img, .div3 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .div2 img.active, .div3 img.active {
+            opacity: 1;
+        }
+        .faq-section {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .faq {
+            margin-bottom: 20px;
+        }
+        .faq h3 {
+            margin: 0 0 10px;
+        }
+        .faq p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-section">
+        <h1>Bienvenue sur le site du Festival de Jeux !</h1>
+    </div>
+    <div class="container">
+        <div class="div1">
+            <div class="faq">
+                <h3 style="text-align: center;">Quel est le but de ce site ?</h3>
+                <br>
+                <p>Ce site a pour but de faciliter l'organisation du Festival de Jeux de Société. Il permet aux gestionnaires de suivre les ventes et de générer des bilans, aux administrateurs de gérer les sessions de vente et les utilisateurs, et aux vendeurs de consulter en temps réel le nombre de jeux vendus. Tout le monde peut accéder au catalogue des jeux disponibles.</p>
+            </div>
+        </div> <!-- Haut à gauche -->
+        <div class="div2" style="background-color: #333;">
+            <img src="IMAGE/acc4.png" alt="Image 1" class="active">
+            <img src="IMAGE/acc2.png" alt="Image 2">
+        </div> <!-- Haut à droite -->
+        <div class="div3" style="background-color: #333;">
+            <img src="IMAGE/acc3.png" alt="Image 1" class="active">
+            <img src="IMAGE/acc1.png" alt="Image 2">
+        </div> <!-- Bas à gauche -->
+        <div class="div4">
+            <div class="faq">
+                <h3 style="text-align: center;">Gérer les Ventes</h3>
+                <br>
+                <p>Les gestionnaires peuvent facilement suivre et gérer les ventes de jeux en temps réel, générer des bilans de vente et optimiser les stocks pour assurer le bon déroulement du festival.</p>
+            </div>
+            <div class="faq">
+                <h3 style="text-align: center;">Accéder au Catalogue</h3>
+                <br>
+                <p>Tout le monde peut explorer le catalogue des jeux disponibles, y compris les visiteurs et les participants au festival. Découvrez les jeux en vedette et préparez votre visite en parcourant les titres que vous souhaitez essayer ou acheter.</p>
+            </div>
+        </div> <!-- Bas à droite -->
+    </div>
+
+    <script>
+        const div2Images = document.querySelectorAll('.div2 img');
+        const div3Images = document.querySelectorAll('.div3 img');
+
+        let currentIndex2 = 0;
+        let currentIndex3 = 0;
+
+        function showNextImage(images, currentIndex) {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+            return currentIndex;
+        }
+
+        setInterval(() => {
+            currentIndex2 = showNextImage(div2Images, currentIndex2);
+            currentIndex3 = showNextImage(div3Images, currentIndex3);
+        }, 6000);
+    </script>
+</body>
+</html>

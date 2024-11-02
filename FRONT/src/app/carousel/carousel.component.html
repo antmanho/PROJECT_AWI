@@ -1,0 +1,7 @@
+<div class="carousel">
+  <img *ngFor="let img of images; let i = index"
+       [src]="img"
+       [alt]="'Image ' + (i + 1)"
+       [style.opacity]="i === currentIndex ? 1 : 0"
+       class="carousel-image">
+</div>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion - Instagram Style</title>
+</head>
+<body>
+    <div class="container">
+        <div class="carousel">
+            <img src="IMAGE/image1.PNG" alt="Image 1">
+            <img src="IMAGE/image2.PNG" alt="Image 2">
+        </div>
+        <div class="login-form-container">
+            <div class="login-form">
+                <h1>CONNEXION</h1>
+                
+                <form (ngSubmit)="onSubmit()">
+                    <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="Email" required>
+                    <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit" name="register" value="Valider">Se connecter</button>
+                </form>
+                
+                <!-- Afficher le message d'erreur -->
+                <div *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+                    {{ errorMessage }}
+                </div>
+
+
+                
+                <div class="divider">
+                    <span class="or-text">OU</span>
+                </div>
+                <br>
+                <a href="/mot-passe-oublie" class="password-reset-link">Mot de passe oublié ?</a>
+            </div>
+            <div style="border: 2px solid black; width: 98%; height: 20%; margin-top: 20px; display: flex; justify-content: center; align-items: center;">
+                <span style="padding: 2px;">Vous n'avez pas de compte ? </span>
+                <a href="/inscription" class="signup-link">Inscrivez-vous</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Barbedet Anthony & Delclaud Corentin production | Polytech school | © 2024 Boardland
+    </footer>
+    
+    <script>
+        // Crousel script
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        
+        setInterval(() => {
+            images[currentIndex].style.opacity = 0;
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].style.opacity = 1;
+        }, 5000);
+    </script>
+</body>
+</html>
+

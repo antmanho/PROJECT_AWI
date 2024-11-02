@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion - Instagram Style</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="carousel">
+            <!-- Insérer vos images de carrousel ici -->
+            <!-- Remplacez "IMAGE/image1.png" et "image2.png" par les liens de vos images -->
+            <img src="IMAGE/image1.PNG" alt="Image 1">
+            <img src="IMAGE/image2.PNG" alt="Image 2">
+        </div>
+        <div class="login-form-container">
+            <div class="login-form">
+                            
+                <h1>INSCRIPTION</h1>
+                            
+                   
+                               
+                               
+                               <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                                   <input type="email" formControlName="new_email" placeholder="Email" required>
+                                   <input type="password" formControlName="new_password" placeholder="Mot de passe" required>
+                                   <input type="password" formControlName="confirm_password" placeholder="Confirmation Mot de passe" required>
+                                       <br><br><br>
+                                   <button type="submit">S'inscrire</button>
+                               </form>
+
+
+                               <div *ngIf="errorMessage; else noError" style="color: red;">
+                                   {{ errorMessage }}
+                               </div>
+                               <ng-template #noError>
+                                   <br>
+                               </ng-template>
+       
+            </div>
+            <div style="border: 2px solid black; width: 98%; height: 20%; margin-top: 20px; display: flex; justify-content: center; align-items: center;">
+                <span style="padding: 2px;">Vous avez deja un compte ? </span>
+                <a href="/connexion" class="signup-link">Connectez-vous</a>
+                
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Barbedet Anthony & Delclaud Corentin production | Polytech school | © 2024 Boardland
+    </footer>
+             
+
+    <script>
+        // Fonction pour faire défiler les images automatiquement dans le carrousel
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        
+        setInterval(() => {
+            images[currentIndex].style.opacity = 0; // Masquer l'image actuelle
+            currentIndex = (currentIndex + 1) % images.length; // Passer à l'image suivante
+            images[currentIndex].style.opacity = 1; // Afficher la nouvelle image
+        }, 5000); // Changer d'image toutes les 5 secondes
+    </script>
+</body>
+</html>
+

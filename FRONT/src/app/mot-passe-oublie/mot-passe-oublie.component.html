@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion - Instagram Style</title>
+  
+</head>
+<body>
+    <div class="container">
+        <div class="carousel">
+            <!-- Insérer vos images de carrousel ici -->
+            <!-- Remplacez "image1.png" et "image2.png" par les liens de vos images -->
+            <img src="IMAGE/image1.PNG" alt="Image 1">
+            <img src="IMAGE/image2.PNG" alt="Image 2">
+        </div>
+        <div class="login-form-container">
+            <div class="login-form">
+                <h1>BoardLand</h1>
+                <div style="text-align: center;">
+                            <img src="IMAGE/lock.PNG" style="width: 17%;" alt="Image 2">
+                                <p><strong>Problèmes de connexion ?</strong></p>
+                                <p style="color: #a9a9a9;font-size:10px;">Entrez votre adresse e-mail, votre numéro de téléphone ou votre nom d’utilisateur, et nous vous enverrons un lien pour récupérer votre compte.<p>
+                            
+                        </div>
+                <form (ngSubmit)="onSubmit(motDePasseOublieForm)" #motDePasseOublieForm="ngForm">
+                    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required>
+                    <button type="submit" [disabled]="!motDePasseOublieForm.form.valid"> Récupération mot de passe </button>
+                </form>
+
+
+                             
+                <br>
+                
+            
+                <!-- End if "menu" -->
+                
+            </div>
+            <div style="border: 2px solid black; width: 98%; height: 20%; margin-top: 20px; display: flex; justify-content: center; align-items: center;">
+                
+                <span style="padding: 2px;">Vous n'avez pas de compte ? </span>
+                <a href="/inscription" class="signup-link">Inscrivez-vous</a>
+                
+            </div>
+        </div>
+    </div>
+                        
+    <footer>
+        Barbedet Anthony & Delclaud Corentin production | Polytech school | © 2024 Boardland
+    </footer>
+       
+
+    <script>
+        // Fonction pour faire défiler les images automatiquement dans le carrousel
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        
+        setInterval(() => {
+            images[currentIndex].style.opacity = 0; // Masquer l'image actuelle
+            currentIndex = (currentIndex + 1) % images.length; // Passer à l'image suivante
+            images[currentIndex].style.opacity = 1; // Afficher la nouvelle image
+        }, 5000); // Changer d'image toutes les 5 secondes
+    </script>
+    <a href="/connexion" id="back-to-top">
+<img src="IMAGE/retour.png" alt="Retour" style="width: 100%; height: 100%;">
+</a>
+</body>
+</html>
