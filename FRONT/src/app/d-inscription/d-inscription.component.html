@@ -24,6 +24,7 @@
                                
                                <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
                                    <input type="email" formControlName="new_email" placeholder="Email" required>
+                                   <input type="name" formControlName="new_name" placeholder="Name" required>
                                    <input type="password" formControlName="new_password" placeholder="Mot de passe" required>
                                    <input type="password" formControlName="confirm_password" placeholder="Confirmation Mot de passe" required>
                                        <br><br><br>

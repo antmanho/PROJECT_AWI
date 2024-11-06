@@ -103,7 +103,7 @@ module.exports = (db) => {
         console.log("*** /inscription ***");
 
         // Extraction des donnees du corps de la requête
-        const { email, password, confirmPassword } = req.body;
+        const { email,name, password, confirmPassword } = req.body;
 
         try {
             // Verification si les mots de passe correspondent
@@ -128,7 +128,7 @@ module.exports = (db) => {
             const verificationCode = Math.floor(100000 + Math.random() * 900000);
 
             // Insertion de l'email, du code et du mot de passe dans la table verification_mail
-            await query('INSERT INTO Verification_mail (Email, Code, Password) VALUES (?, ?, ?)', [email, verificationCode, password]);
+            await query('INSERT INTO Verification_mail (Email, Name, Code, Password) VALUES (?, ?, ?, ?)', [email,name, verificationCode, password]);
 
             console.log("*** Envoi du code de verification par email ***");
 
