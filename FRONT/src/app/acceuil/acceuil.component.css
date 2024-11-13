@@ -1,0 +1,63 @@
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+.welcome-section {
+    background-color: #f8f8f8;
+    padding: 50px 20px;
+    text-align: center;
+    color: #333;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: calc(100vh - 150px);
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.div1, .div2, .div3, .div4 {
+    width: calc(45% - 5px);
+    height: calc(45% - 5px);
+    box-sizing: border-box;
+    position: relative;
+    margin: 5px;
+}
+.div2 img, .div3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.div2 img.active, .div3 img.active {
+    opacity: 1;
+}
+.faq-section {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.faq {
+    margin-bottom: 20px;
+}
+.faq h3 {
+    margin: 0 0 10px;
+}
+.faq p {
+    margin: 0;
+}
