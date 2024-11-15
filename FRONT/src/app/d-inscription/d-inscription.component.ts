@@ -18,6 +18,7 @@ export class DinscriptionComponent {
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { // Injecter le Router
     this.registrationForm = this.fb.group({
       new_email: ['', [Validators.required, Validators.email]],
+      new_name: ['', [Validators.required]],
       new_password: ['', [Validators.required]],
       confirm_password: ['', [Validators.required]]
     });
@@ -30,7 +31,8 @@ export class DinscriptionComponent {
 
       // Ajout de { withCredentials: true } dans la requête HTTP
       this.http.post('http://localhost:3000/api/inscription', {
-        email: formData.new_email,
+        email: formData.new_email,        
+        name: formData.new_name,
         password: formData.new_password,
         confirmPassword: formData.confirm_password
       }, { withCredentials: true }) // Ajoutez cela pour gérer les cookies de session
