@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des tournois</title>
+</head>
+<body>
+    <div class="main-container">
+        <div id="header" style="width: 100%; height: 1.5vh; background-color: white; z-index: 1000;">
+            <div style="text-align: center;">
+                <br>
+                <h1>Votre CATALOGUE</h1>
+            </div>
+            
+            <br><br>
+
+            <div style="display: flex; align-items: center; width: 100%">
+                <div style="flex-grow: 1;">
+                    <form method="get" action="/R1" style="display: flex;">
+                        <input type="text" name="search" placeholder="Rechercher..." style="flex-grow: 1; height: 5vh; border: 2px solid black; outline: none; font-size: 2vw;" />
+                        <input id="search-button" type="submit" Value=""/>
+                    </form>
+                </div>
+                <div>
+                    <button id="reglage-button" onclick="openFilterPopup()"></button>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br><br><br>
+        <div id="Mycatalogue">
+            <div *ngFor="let game of games" class="card">
+                <h2>{{ game.nom_jeu }}</h2>
+                <img [src]="game.photo_path" alt="Image du jeu {{ game.nom_jeu }}" class="card-image" />
+                <div class="card-content">
+                    <p>N°article : {{ game.id_stock }}</p>
+                    <p>------------------------</p>
+                    <p>{{ game.prix_final }} €</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
