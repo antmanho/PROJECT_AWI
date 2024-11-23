@@ -28,6 +28,9 @@
         </div>
         <br><br><br>
         <div id="Mycatalogue">
+            <div *ngIf="games.length === 0" class="no-games">
+                <p>Aucun jeu mis en vente actuellement.</p>
+            </div>
             <div *ngFor="let game of games" class="card">
                 <h2>{{ game.nom_jeu }}</h2>
                 <img [src]="game.photo_path" alt="Image du jeu {{ game.nom_jeu }}" class="card-image" />
@@ -38,6 +41,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </body>
 </html>

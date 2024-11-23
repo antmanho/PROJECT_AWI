@@ -1,37 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-
-interface Game {
-  id_stock: number;
-  nom_jeu: string;
-  Prix_unit: number;
-  photo_path: string;
-  Frais_depot_fixe: number;
-  Frais_depot_percent: number;
-  prix_final: number; // Prix ajusté incluant les frais
-}
+import { GameService } from '../services/GameService'; // Chemin vers votre service
 
 @Component({
-  selector: 'app-catalogue_vendeur',
-  standalone: true,
-  imports: [CommonModule], // Ajout de CommonModule ici
+  selector: 'app-catalogue-vendeur',
   templateUrl: './catalogue_vendeur.component.html',
-  styleUrls: ['./catalogue_vendeur.component.css']
+  styleUrls: ['./catalogue_vendeur.component.css'],
 })
-export class CatalogueComponent implements OnInit {
-  games: Game[] = [];
+export class CatalogueVendeurComponent implements OnInit {
+  games: any[] = []; // Tableau pour stocker les jeux récupérés
 
-  constructor(private http: HttpClient) {}
+  constructor(private gameService: GameService) {}
 
-  ngOnInit() {
-    this.fetchCatalogue();
-  }
-
-  fetchCatalogue() {
-    this.http.get<Game[]>('http://localhost:3000/api/catalogue_vendeur').subscribe(
-      data => this.games = data,
-      error => console.error('Erreur lors du chargement du catalogue:', error)
+  ngOnInit(): void {
+    const userEmail = 'vendeur1@example.com'; // À remplacer par l'email réel de l'utilisateur
+    this.gameService.getGames(userEmail).subscribe(
+      (data) => {
+        this.games = data;
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des jeux:', error);
+      }
     );
   }
 }

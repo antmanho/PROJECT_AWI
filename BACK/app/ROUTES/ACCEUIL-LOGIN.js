@@ -236,8 +236,6 @@ module.exports = (db) => {
     });
 
 
-
-
     // Route de connexion
     router.post('/api/connexion', (req, res) => {
         console.log("Tentative de connexion");
@@ -867,7 +865,27 @@ module.exports = (db) => {
     });
 
     
+    router.get('/cataloguevendeur', async (req, res) => {
+        const email = req.query.email; // Supposons que l'email soit passé comme paramètre de requête
+        if (!email) {
+            return res.status(400).send('Email est requis');
+        }
     
+        try {
+            const [rows] = await db.execute(`
+                SELECT id_stock, nom_jeu, Prix_unit AS prix_final, photo_path 
+                FROM Stock 
+                WHERE email_vendeur = ? AND est_en_vente = 1
+            `, [email]);
+    
+            res.json(rows);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Erreur lors de la récupération des jeux.');
+        }
+    }); 
+
+
     return router;
 };
 //    //----------------------------------------------------------------------
