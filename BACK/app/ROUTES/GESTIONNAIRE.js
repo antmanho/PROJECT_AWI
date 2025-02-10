@@ -667,6 +667,7 @@ module.exports = (db) => {
                 Stock.est_en_vente
             FROM Stock
             JOIN Session ON Stock.numero_session_actuelle = Session.id_session
+            WHERE est_en_vente = 1
         `;
         
     
