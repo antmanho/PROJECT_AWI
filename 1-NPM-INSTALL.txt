@@ -1,0 +1,36 @@
+BACK
+
+npm init (dans racine )
+npm install express express-session nodemailer body-parser axios mysql path uuid cors fs https
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mettre le FRONT sen public :
+PROJECT_AWI/FRONT/src/app/Services/BASE_URL.ts
+
+GERER ROUTES :
+Modifie App.routes.ts
+
+ESTHETIQUE CODE :
+D’abord chaque page est un service avec un root qui gère le tout et tous les ts en mode standalone  puis transforme service les requêtes back : 
+
+Voici les fichier ts que j’ai
+J’aimerais mettre toute les requete de ce fichiers  vers mon back (3000) et les interfaces dans le service « service-gestionnaire.service.ts » qui ressemble actuellement à ca et que tu dois mettre à jour :
+
+

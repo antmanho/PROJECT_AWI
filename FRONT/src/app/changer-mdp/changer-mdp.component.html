@@ -168,5 +168,13 @@
 <footer>
     Barbedet Anthony & Delclaud Corentin production | Polytech school | © 2024 Boardland
 </footer>
+<!-- Notification -->
+
+<div class="notification" *ngIf="showNotification">
+    <button class="close-btn" (click)="closeNotification()">&times;</button>
+    {{ notificationMessage }}
+</div>
+
+
 </body>
 </html>

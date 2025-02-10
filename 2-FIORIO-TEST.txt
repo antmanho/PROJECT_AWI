@@ -1,0 +1,19 @@
+Bonjour monsieur ,
+
+Voici des exemples de test que vous pouvez menez :
+
+1 - Essayer d'accéder à une route uniquement accessible via les admin sans s'être connecté :
+
+https://anthonybarbedet.com/modification-session
+https://anthonybarbedet.com/creer-session
+Etc..
+
+Route uniquement accessible par le gestionnaire et l'admin :
+https://anthonybarbedet.com/depot
+Etc..
+
+Si les rôles ne sont pas les bons vous serez toujours redirigez vers https://anthonybarbedet.com/pas-le-role
+
+2 - Essayer de verifier son mail lors de l'inscription (mail recu avec code) 
+
+ 

@@ -12,6 +12,7 @@
             border-bottom: 1px solid #dee2e6;
         }
         .notification {
+            
             padding: 20px;
             background-color: #f0f9eb;
             color: #155724;
@@ -23,7 +24,6 @@
             z-index: 1000;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .close-btn {
             background: none;
             border: none;
@@ -174,8 +174,8 @@
 </head>
 <body>
     <br> <br>
-    <form (ngSubmit)="onSubmit()" class="centered-button" style="width: 65%; height: auto; border: 3px solid black; padding: 0.5vw; background-color: rgba(255, 255, 255, 0.8);">
-        <h1>Historique des achats</h1>
+    <form (ngSubmit)="onSubmit()" class="centered-button" style="width: 65%; height: auto; border: 3px solid black; padding: 0.5vw; background-color: rgba(255, 255, 255, 0.97);">
+        <h1>HISTORIQUE DES VENTES</h1>
         <table style="width: 100%; border-collapse: collapse;">
             <thead>
                 <tr>
@@ -195,7 +195,7 @@
             </tbody>
         </table>
 
-        <h2>Somme totale : {{ historiqueVentes[0]?.Somme_total_du || 0 }} €</h2> <!-- Ajout de l'unité monétaire -->
+        <h2>Somme totale du: {{ historiqueVentes[historiqueVentes.length - 1].Somme_total_du || 0 }} €</h2> <!-- Ajout de l'unité monétaire -->
 
         <input type="hidden" [(ngModel)]="emailVendeur" name="emailVendeur" /> <!-- Champ caché pour envoyer l'email -->
         <button type="submit" style="width: 100%; height: 10vh; font-size: 3.5vw; display: block; margin: 0 auto; text-align: center;">Payer le vendeur</button>
@@ -203,6 +203,12 @@
     <a href="/payer-vendeur" id="back-to-top">
         <img src="IMAGE/retour.png" alt="Retour" style="width: 100%; height: 100%;">
     </a>
+    
+    <!-- Notification -->
+    <div class="notification" *ngIf="showNotification">
+        <button class="close-btn" (click)="closeNotification()">&times;</button>
+        Vous avez validé le paiement du veendeur .
+    </div>
 </body>
 
 </html>

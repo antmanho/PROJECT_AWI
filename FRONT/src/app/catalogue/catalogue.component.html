@@ -137,8 +137,13 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
+        .card:hover {
+            transform: scale(1.1); /* Agrandir la carte de 10% lorsqu'elle est survolée */
+            z-index: 10; /* Assurez-vous que la carte survolée se place au-dessus des autres */
+        }
         .card-image {
             width: 100%;
             height: 150px;
@@ -157,6 +162,17 @@
         .card-content p {
             margin: 5px 0;
         }
+        .no-link-style {
+          text-decoration: none; /* Supprime le souligné */
+          color: inherit; /* Hérite de la couleur du texte environnant */
+          font-weight: normal; /* Assure que le texte n'est pas en gras */
+        }
+
+        .no-link-style:hover {
+          text-decoration: none; /* Supprime le souligné au survol */
+          color: inherit; /* Maintient la couleur lors du survol */
+        }
+
     </style>
 </head>
 <body>
@@ -184,16 +200,19 @@
         </div>
         <br><br><br>
         <div id="catalogue">
-            <div *ngFor="let game of games" class="card">
-                <h2>{{ game.nom_jeu }}</h2>
-                <img [src]="game.photo_path" alt="Image du jeu {{ game.nom_jeu }}" class="card-image" />
-                <div class="card-content">
-                    <p>N°article : {{ game.id_stock }}</p>
-                    <p>------------------------</p>
-                    <p>{{ game.prix_final }} €</p>
-                </div>
-            </div>
+          <div *ngFor="let game of games" class="card">
+              <a [routerLink]="['/detail-article', game.id_stock]" class="no-link-style">
+                  <h2>{{ game.nom_jeu }}</h2>
+              <img [src]="'http://localhost:3000' + game.photo_path" alt="Image du jeu {{ game.nom_jeu }}" class="card-image" />
+              <div class="card-content">
+                <p>N°article : {{ game.id_stock }}</p>
+                <p>------------------------</p>
+                <p>{{ game.prix_final }} €</p>
+              </div>
+            </a>
+          </div>
         </div>
+
     </div>
 </body>
 </html>

@@ -161,10 +161,11 @@
     </style>
 </head>
 <body>
-    <br>
-    <h1>BILAN</h1>
-    <br>
-    <form (submit)="creerListe()" class="centered-button" style="width: 65%; height: auto; border: 3px solid black; padding: 0.5vw; background-color: rgba(255, 255, 255, 0.8);">
+    <br><br>
+    <form (submit)="creerListe()" class="centered-button" style="width: 65%; height: auto; border: 3px solid black; padding: 0.5vw; background-color: rgba(255, 255, 255,  0.97);">
+        <br>
+        <h1>BILAN</h1>
+        
         <br><br><div class="form-group">
             <label for="chargesFixes">Charges fixes :</label>
             <input type="number" id="chargesFixes" placeholder="Charges fixes" [(ngModel)]="chargesFixes" name="chargesFixes"  required>
@@ -205,7 +206,7 @@
                     {{ errorMessage }}
                 </div>
 
-            <input type="submit" value="Créer Liste" style="width: 100%; height: 10vh; font-size: 3.5vw; display: block; margin: 0 auto; text-align: center;">
+            <input type="submit" value="Créer le Bilan" style="width: 100%; height: 10vh; font-size: 3.5vw; display: block; margin: 0 auto; text-align: center;">
         </form>
     
 </body>

@@ -231,7 +231,7 @@
         <div id="catalogue">
             <div *ngFor="let game of games" class="card">
                 <h2>{{ game.nom_jeu }}</h2>
-                <img [src]="game.photo_path" alt="Image du jeu {{ game.nom_jeu }}" class="card-image" />
+                <img [src]="'http://localhost:3000' + game.photo_path" alt="Image du jeu {{ game.nom_jeu }}" class="card-image" />
                 <div class="card-content">
                     <p>N°article : {{ game.id_stock }}</p>
                     <p>------------------------</p>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un tournoi</title>
+    <style>
+        .header {
+            position: relative;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .notification {
+            padding: 20px;
+            background-color: #f0f9eb;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #155724;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            float: right;
+        }
+        .optional-fields {
+            display: none;
+        }
+        .toggle-button {
+            cursor: pointer;
+            user-select: none;
+        }
+        .centered-button {
+            width: 30%;
+            height: 10%;
+            font-size: 3vw;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #m_tournois, #h_tournois, #date_tournois {
+            width: 10%;
+            height: 7vh;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            position: relative;
+            background-image: url('IMAGE/sport.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.90);
+            z-index: -1;
+        }
+        .custom-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 10%;
+            height: 5vh;
+            padding: 10px;
+            border: 1px solid #000;
+            background-color: #fff;
+            color: #000;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .custom-select:focus {
+            outline: none;
+        }
+        h1 {
+            font-size: 4vw;
+            text-align: center;
+            margin: 0 auto;
+        }
+        input {
+            width: 50%;
+            height: 4vh;
+            font-size: 2vw;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: space-between; /* Ajout pour un alignement correct */
+            width: 80%;
+            margin: 0 auto;
+        }
+        .checkbox-large {
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+
+        /* Styles pour le switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px; /* Largeur du bouton bascule */
+            height: 34px; /* Hauteur du bouton bascule */
+            margin-left: 10px;
+        }
+        
+        .switch input {
+            opacity: 0; /* Rendre le checkbox invisible */
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc; /* Couleur de fond par défaut */
+            transition: .4s;
+            border-radius: 34px; /* Arrondir les coins */
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px; /* Hauteur du cercle */
+            width: 26px; /* Largeur du cercle */
+            left: 4px; /* Position initiale */
+            bottom: 4px;
+            background-color: white; /* Couleur du cercle */
+            border-radius: 50%; /* Cercle */
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: grey; /* Couleur de fond lorsque coché */
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px); /* Déplacement du cercle */
+        }
+        .notification {
+            
+            padding: 20px;
+            background-color: #f0f9eb;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #155724;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            float: right;
+        }
+
+    </style>
+</head>
+<body>
+    <br>
+
+    <br>
+    <form #preinscriptionForm="ngForm" (ngSubmit)="onSubmit(preinscriptionForm)" class="centered-button" style="width: 65%; height: auto; border: 3px solid black; padding: 0.5vw; background-color: rgba(255, 255, 255, 0.97);">
+        <br>
+        <h1>PREINSCRIRE</h1>
+        <br>
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" required style="width: 50%;" />
+
+        <br><br>
+
+        <label for="role">Rôle :</label>
+        <select id="role" [(ngModel)]="role" name="role" required class="custom-select" style="width: 50%;">
+            <option value="" disabled selected>Choisissez un rôle</option>
+            <option value="vendeur">Vendeur</option>
+            <option value="admin">Admin</option>
+            <option value="acheteur">Acheteur</option>
+            <option value="gestionnaire">Gestionnaire</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit" style="width: 100%; height: 10vh; font-size: 3.5vw; display: block; margin: 0 auto; text-align: center;">PREINSCRIRE</button>
+    </form>
+
+</body>
+<!-- Notification -->
+<div class="notification" *ngIf="showNotification">
+    <button class="close-btn" (click)="closeNotification()">&times;</button>
+    La préinscription a été enregistrée avec succès.
+</div>
+</html>

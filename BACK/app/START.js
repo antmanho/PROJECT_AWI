@@ -7,12 +7,32 @@ const mysql = require('mysql');
 const path = require('path');
 const { v4: uuid } = require('uuid');
 const cors = require('cors'); // Importez cors
+const fs = require("fs");
+const https = require('https');
 
 const app = express();
 const port = 3000;
 const { sessionMiddleware, sessionInitMiddleware, sessionCheckMiddleware } = require('./INIT-MIDDLEW/MIDDLE_WARE');
 const db = require('./INIT-MIDDLEW/DB');
+
+//HTTPS-------DEBUTT
+const certPath = path.join(__dirname, '../../../../etc/letsencrypt/live/anthonybarbedet.com/fullchain.pem')
+const keyPath = path.join(__dirname, '../../../../etc/letsencrypt/live/anthonybarbedet.com/privkey.pem')
+
+
+    // Lecture des fichiers de certificat et de clé
+const options = {
+      key: fs.readFileSync(keyPath),
+      cert: fs.readFileSync(certPath)
+    };
+
+//HTTPS-------FIN
+
 const acceuilLoginRoutes = require('./ROUTES/ACCEUIL-LOGIN')(db);
+const Admin = require('./ROUTES/ADMIN')(db);
+const Gestionnaire = require('./ROUTES/GESTIONNAIRE.js')(db);
+const Vendeur = require('./ROUTES/VENDEUR.js')(db);
+const Protection = require('./ROUTES/PROTECTION-ROUTE.js')(db);
 
 // Middleware pour CORS pour permettre les requete POST d'un autre port
 app.use(cors({
@@ -20,20 +40,29 @@ app.use(cors({
     credentials: true //cookie session accept
 }));// Middleware pour traiter les données JSON
 app.use(express.json()); // Utilisez express.json() pour traiter le JSON
-
+app.use(express.static(path.join(__dirname, 'RESSOURCES')));
 // Utilisez le middleware de session en premier
 app.use(sessionMiddleware);
 app.use(sessionInitMiddleware);
 // Ensuite, utilisez votre middleware de vérification
 app.use(sessionCheckMiddleware);
 
-// Utilisez le routeur pour gérer les routes
+// ----------Utilisez le routeur pour gérer les routes--------------
+app.use('/', Protection);
 app.use('/', acceuilLoginRoutes);
+app.use('/', Admin);
+app.use('/', Gestionnaire);
+app.use('/', Vendeur);
 
-app.listen(port, () => {
-    console.log(`Serveur démarré sur le port ${port}`);
-});
 
+//app.listen(port, () => {
+//    console.log(`Serveur démarré sur le port ${port}`);
+//});
+//HTTPS
+const server = https.createServer(options, app);
+server.listen(port, () => {
+                  console.log(`Serveur démarré sur le port ${port}`);
+              });
 
 //-----------------------------------------------------------------------------------
 //     _____ ___ _   _

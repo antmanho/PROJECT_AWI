@@ -1,57 +1,151 @@
 import { Routes } from '@angular/router';
-import { DconnexionComponent } from './d-connexion/d-connexion.component';
-import { DinscriptionComponent } from './d-inscription/d-inscription.component';
-import { MotPasseOublieComponent } from './mot-passe-oublie/mot-passe-oublie.component';
-import { ChangerMdpComponent } from './changer-mdp/changer-mdp.component';
-import { MenuComponent } from './menu/menu.component';
-import { AcceuilComponent } from './acceuil/acceuil.component';
-import { ContactComponent } from './contact/contact.component';
-import { CheckEmailComponent } from './check-email/check-email.component';
-import { CatalogueComponent } from './catalogue/catalogue.component';
-import { Droot } from './root/root.component';
-import { DepotComponent } from './depot/depot.component';
-import { MiseEnVenteComponent } from './mise-en-vente/mise-en-vente.component';
-import { BilanComponent } from './bilan/bilan.component';
-import { BilanGrapheComponent } from './bilan-graphe/bilan-graphe.component';
-import { RetraitComponent } from './retrait/retrait.component';
-import { RetraitListeComponent } from './retrait-liste/retrait-liste.component';
-import { EnregistrerAchatComponent } from './enregistrer-achat/enregistrer-achat.component';
-import { PayerVendeurComponent } from './payer-vendeur/payer-vendeur.component';
-import { PayerVendeurListeComponent } from './payer-vendeur-liste/payer-vendeur-liste.component';
+import { Verification_G_A } from './auth/verification-g-a.guard';
+import { Verification_A } from './auth/verification-a.guard';
+import { Verification_V } from './auth/verification-v.guard';
 
 export const routes: Routes = [
-  { path: 'connexion', component: DconnexionComponent },
-  { path: 'payer-vendeur', component: PayerVendeurComponent },
-  { path: 'payer-vendeur-liste/:email', component: PayerVendeurListeComponent },
-  { path: 'enregistrer-achat', component: EnregistrerAchatComponent },
-  { path: 'retrait-liste/:email', component: RetraitListeComponent },
-  { path: 'retrait', component: RetraitComponent },
-  { path: 'bilan', component: BilanComponent },
   {
-      path: 'bilan-graphe',
-      component: BilanGrapheComponent,
-      // Utilisation de queryParams pour récupérer les paramètres
-      data: {
+    path: 'detail-article/:id',
+    loadComponent: () => import('./detail-article/detail-article.component').then(m => m.DetailArticleComponent)
+  },
+  {
+    path: 'vendeur',
+    loadComponent: () => import('./vendeur/vendeur.component').then(m => m.VendeurComponent),
+    canActivate: [Verification_V]
+  },
+  {
+    path: 'pas-le-role',
+    loadComponent: () => import('./pas-le-role/pas-le-role.component').then(m => m.PasLeRoleComponent)
+  },
+  {
+    path: 'gestion-utilisateur',
+    loadComponent: () => import('./gestion-utilisateur/gestion-utilisateur.component').then(m => m.GestionUtilisateurComponent),
+    canActivate: [Verification_A]
+  },
+  {
+    path: 'modification-session',
+    loadComponent: () => import('./modification-session/modification-session.component').then(m => m.ModificationSessionComponent),
+    canActivate: [Verification_A]
+  },
+  {
+    path: 'creer-session',
+    loadComponent: () => import('./creer-session/creer-session.component').then(m => m.CreerSessionComponent),
+    canActivate: [Verification_A]
+  },
+  {
+    path: 'connexion',
+    loadComponent: () => import('./d-connexion/d-connexion.component').then(m => m.DconnexionComponent)
+  },
+  {
+    path: 'payer-vendeur',
+    loadComponent: () => import('./payer-vendeur/payer-vendeur.component').then(m => m.PayerVendeurComponent),
+    canActivate: [Verification_G_A]
+  },
+  {
+    path: 'payer-vendeur-liste/:email',
+    loadComponent: () => import('./payer-vendeur-liste/payer-vendeur-liste.component').then(m => m.PayerVendeurListeComponent),
+    canActivate: [Verification_G_A]
+  },
+  {
+    path: 'enregistrer-achat',
+    loadComponent: () => import('./enregistrer-achat/enregistrer-achat.component').then(m => m.EnregistrerAchatComponent),
+    canActivate: [Verification_G_A]
+  },
+  {
+    path: 'retrait-liste/:email',
+    loadComponent: () => import('./retrait-liste/retrait-liste.component').then(m => m.RetraitListeComponent),
+    canActivate: [Verification_G_A]
+  },
+  {
+    path: 'retrait',
+    loadComponent: () => import('./retrait/retrait.component').then(m => m.RetraitComponent),
+    canActivate: [Verification_G_A]
+  },
+  {
+    path: 'bilan',
+    loadComponent: () => import('./bilan/bilan.component').then(m => m.BilanComponent),
+    canActivate: [Verification_G_A]
+  },
+  {
+    path: 'bilan-graphe',
+    loadComponent: () => import('./bilan-graphe/bilan-graphe.component').then(m => m.BilanGrapheComponent),
+    data: {
       bilanParticulier: '',
       sessionParticuliere: '',
       emailParticulier: '',
       numeroSession: '',
-      totalQuantitéDéposée: '', // Ajoutez totalQuantitéDéposée de la réponse
-      totalQuantitéVendu: '', // Ajoutez totalQuantitéVendu de la réponse
-      chargesFixes: '' // Ajoutez chargesFixes
-      }
-    },
-  { path: 'depot', component: DepotComponent },
-  { path: 'catalogue', component: CatalogueComponent },
-  { path: 'root', component: Droot },
- { path: 'inscription', component: DinscriptionComponent },
-  { path: 'mot-passe-oublie', component: MotPasseOublieComponent },
-  { path: 'mise_en_vente', component: MiseEnVenteComponent },
-  { path: 'changer-mdp/:email', component: ChangerMdpComponent },  // Modification ici
-  { path: 'menu', component: MenuComponent },
-  { path: 'acceuil', component: AcceuilComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'verification-mail/:email', component: CheckEmailComponent },
- { path: '', redirectTo: '/root', pathMatch: 'full' }, // Redirection par défaut vers la connexion
+      totalQuantitéDéposée: '',
+      totalQuantitéVendu: '',
+      chargesFixes: ''
+    }
+  },
+  {
+    path: 'vendeur-bilan',
+    loadComponent: () => import('./vendeur-bilan/vendeur-bilan.component').then(m => m.VendeurBilanComponent),
+    data: {
+      bilanParticulier: '',
+      sessionParticuliere: '',
+      emailParticulier: '',
+      numeroSession: '',
+      totalQuantitéDéposée: '',
+      totalQuantitéVendu: '',
+      chargesFixes: ''
+    }
+  },
+  {
+    path: 'depot',
+    loadComponent: () => import('./depot/depot.component').then(m => m.DepotComponent),
+    canActivate: [Verification_G_A]
+  },
+  {
+    path: 'catalogue',
+    loadComponent: () => import('./catalogue/catalogue.component').then(m => m.CatalogueComponent)
+  },
+  {
+    path: 'root',
+    loadComponent: () => import('./root/root.component').then(m => m.Droot)
+  },
+  {
+    path: 'inscription',
+    loadComponent: () => import('./d-inscription/d-inscription.component').then(m => m.DinscriptionComponent)
+  },
+  {
+    path: 'mot-passe-oublie',
+    loadComponent: () => import('./mot-passe-oublie/mot-passe-oublie.component').then(m => m.MotPasseOublieComponent)
+  },
+  {
+    path: 'mise_en_vente',
+    loadComponent: () => import('./mise-en-vente/mise-en-vente.component').then(m => m.MiseEnVenteComponent),
+    canActivate: [Verification_G_A]
+  },
+  {
+    path: 'changer-mdp/:email',
+    loadComponent: () => import('./changer-mdp/changer-mdp.component').then(m => m.ChangerMdpComponent)
+  },
+  {
+    path: 'menu',
+    loadComponent: () => import('./menu/menu.component').then(m => m.MenuComponent)
+  },
+  {
+    path: 'acceuil',
+    loadComponent: () => import('./acceuil/acceuil.component').then(m => m.AcceuilComponent)
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent)
+  },
+  {
+    path: 'verification-mail/:email',
+    loadComponent: () => import('./check-email/check-email.component').then(m => m.CheckEmailComponent)
+  },
+  {
+    path: 'preinscription',
+    loadComponent: () => import('./preinscription/preinscription.component').then(m => m.PreinscriptionComponent),
+  canActivate: [Verification_A]
+  },
+  {
+    path: '',
+    redirectTo: '/root',
+    pathMatch: 'full'
+  }
 ];
-

@@ -1,0 +1,107 @@
+Toute la base de donnée est accessible via une belle interface sur http://81.64.168.138/phpmyadmin/ le mot de passe est "fiorio" et le nom d'utilisateur est "admin"
+
+CREATE DATABASE BDR;
+USE BDR;
+
+-- Table Historique_Depot
+CREATE TABLE Historique_Depot (
+  id_depot INT AUTO_INCREMENT PRIMARY KEY,
+  email_vendeur VARCHAR(255),
+  nom_jeu VARCHAR(255),
+  Prix_unit INT,
+  photo_path VARCHAR(255),
+  numero_session_depot INT,
+  Quantite_depose INT
+);
+
+INSERT INTO Historique_Depot (email_vendeur, nom_jeu, Prix_unit, photo_path, numero_session_depot, Quantite_depose) VALUES
+('vendeur1@example.com', 'Monopoly', 20, '/IMAGE/Monopoly.JPG', 1, 10),
+('vendeur2@example.com', 'Catan', 25, '/IMAGE/Catan.JPG', 1, 5),
+('vendeur1@example.com', 'Risk', 15, '/IMAGE/Risk.JPG', 2, 3),
+('vendeur3@example.com', 'Carcassonne', 30, '/IMAGE/Carcassonne.JPG', 2, 8);
+
+-- Table Historique_Vente
+CREATE TABLE Historique_Vente (
+  id_vente INT AUTO_INCREMENT PRIMARY KEY,
+  email_vendeur VARCHAR(255),
+  nom_jeu VARCHAR(255),
+  Prix_unit INT,
+  photo_path VARCHAR(255),
+  numero_session_vente INT,
+  Quantite_vendu INT,
+  vendeur_paye TINYINT(1)
+);
+
+INSERT INTO Historique_Vente (email_vendeur, nom_jeu, Prix_unit, photo_path, numero_session_vente, Quantite_vendu, vendeur_paye) VALUES
+('vendeur1@example.com', 'Monopoly', 20, '/IMAGE/Monopoly.JPG', 1, 5, 1),
+('vendeur2@example.com', 'Catan', 25, '/IMAGE/Catan.JPG', 1, 2, 0),
+('vendeur1@example.com', 'Risk', 15, '/IMAGE/Risk.JPG', 2, 1, 1),
+('vendeur3@example.com', 'Carcassonne', 30, '/IMAGE/Carcassonne.JPG', 2, 4, 0);
+
+-- Table role_preinscription
+CREATE TABLE role_preinscription (
+  id_rolepre INT AUTO_INCREMENT PRIMARY KEY,
+  Email VARCHAR(255) NOT NULL,
+  Role VARCHAR(255) NOT NULL
+);
+
+-- Table Session
+CREATE TABLE Session (
+  id_session INT AUTO_INCREMENT PRIMARY KEY,
+  Nom_session VARCHAR(255),
+  adresse_session VARCHAR(255),
+  date_debut DATE,
+  date_fin DATE,
+  Charge_totale FLOAT,
+  Frais_depot_fixe INT,
+  Frais_depot_percent INT,
+  Description TEXT
+);
+
+INSERT INTO Session (Nom_session, adresse_session, date_debut, date_fin, Charge_totale, Frais_depot_fixe, Frais_depot_percent, Description) VALUES
+('Session Automne', '10 Rue du Jeu, Ville', '2023-09-01', '2023-09-30', 100, 10, 5, 'Session de vente pour l''automne.'),
+('Session Hiver', '15 Avenue des Joueurs, Ville', '2023-12-01', '2023-12-31', 150, 15, 7, 'Session de vente pour l''hiver.');
+
+-- Table Stock
+CREATE TABLE Stock (
+  id_stock INT AUTO_INCREMENT PRIMARY KEY,
+  email_vendeur VARCHAR(255),
+  nom_jeu VARCHAR(255),
+  Prix_unit INT,
+  numero_session_actuelle INT,
+  Quantite_actuelle INT,
+  est_en_vente TINYINT(1),
+  photo_path VARCHAR(255),
+  editeur VARCHAR(255),
+  Description TEXT
+);
+
+INSERT INTO Stock (email_vendeur, nom_jeu, Prix_unit, numero_session_actuelle, Quantite_actuelle, est_en_vente, photo_path, editeur, Description) VALUES
+('vendeur1@example.com', 'Monopoly', 20, 1, 4, 1, '/IMAGE/Monopoly.JPG', 'Hasbro', 'Un jeu de société classique.'),
+('vendeur2@example.com', 'Catan', 25, 1, 5, 1, '/IMAGE/Catan.JPG', 'Kosmos', 'Un jeu de stratégie apprécié.');
+
+-- Table Users
+CREATE TABLE Users (
+  id_users INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  mdp VARCHAR(255) NOT NULL,
+  nom VARCHAR(255),
+  telephone VARCHAR(20),
+  adresse VARCHAR(255),
+  role VARCHAR(50)
+);
+
+INSERT INTO Users (email, mdp, nom, telephone, adresse, role) VALUES
+('invite', 'p', 'Invite User', '0123456789', '1 Rue de l''Invite, Ville', 'invite'),
+('v', 'p', 'User One', '0123456788', '2 Rue de User, Ville', 'vendeur'),
+('a', 'p', 'Admin User', '0123456787', '3 Rue de Admin, Ville', 'admin'),
+('gestionnaire', 'p', 'Gestionnaire User', '0123456786', '4 Rue de Gestionnaire, Ville', 'gestionnaire');
+
+-- Table Verification_mail
+CREATE TABLE Verification_mail (
+  id_verif INT AUTO_INCREMENT PRIMARY KEY,
+  Email VARCHAR(255) NOT NULL,
+  Code VARCHAR(6) NOT NULL,
+  Password VARCHAR(255) NOT NULL
+);
+

@@ -25,8 +25,8 @@
         }
 
         .navbar-top img {
-            width: 18%;
-            height: 23vh;
+            width: 15%;
+            height: 17vh;
             margin-left: 20px;
         }
 
@@ -148,7 +148,7 @@
         <h1>Boardland</h1>
         <div class="navbar-buttons-container">
             <div *ngIf="emailConnecte === 'invite@example.com'; else loggedIn">
-                <div class="navbar-buttons-title">{{ emailConnecte }}</div>
+                <div class="navbar-buttons-title">NON CONNECTE</div>
                 <div class="navbar-buttons">
                     <a href="/connexion" target="content-frame">
                         <button>Se connecter</button>
@@ -163,9 +163,10 @@
             <ng-template #loggedIn>
                 <div class="navbar-buttons-title">{{ emailConnecte }}</div>
                 <div class="navbar-buttons">
-                    <a href="/root">
-                        <button>Déconnexion</button>
-                    </a>
+                   
+                        <button (click)="deconnexion()">Déconnexion</button>
+
+                  
                 </div>
             </ng-template>
         </div>
@@ -190,16 +191,17 @@
                         <li><a href="/depot" target="content-frame">Dépot</a></li>
                         <li><a href="/retrait" target="content-frame">Retrait</a></li>
                         <li><a href="/mise_en_vente" target="content-frame">Mise en vente </a></li>
-                        <li><a href="/enregistrer_achat" target="content-frame">Enregister Achat</a></li>
-                        <li><a href="/check_achat" target="content-frame">Historique Achat</a></li>
+                        <li><a href="/enregistrer-achat" target="content-frame">Enregister Achat</a></li>
+                        <li><a href="/payer-vendeur" target="content-frame">Payer Vendeur</a></li>
                         <li><a href="/bilan" target="content-frame">Bilan</a></li>
                     </ul>
             
                 <h3><a href="/contact" target="content-frame">ADMIN</a></h3>
                 <ul>
-                    <li><a href="/R2" target="content-frame">Creer Session</a></li>
-                    <li><a href="/R3" target="content-frame">Edit Session</a></li>
-                    <li><a href="/R4" target="content-frame">Gestion User</a></li>
+                    <li><a href="/creer-session" target="content-frame">Creer Session</a></li>
+                    <li><a href="/modification-session" target="content-frame">Modifier Session</a></li>
+                    <li><a href="/gestion-utilisateur" target="content-frame">Gestion Utilisateur</a></li>
+                    <li><a href="/preinscription" target="content-frame">Pré-inscription</a></li>
                 </ul>
             </div>
 
@@ -210,7 +212,7 @@
                     <li><a href="/retrait" target="content-frame">Retrait</a></li>
                     <li><a href="/mise_en_vente" target="content-frame">Mise en vente </a></li>
                     <li><a href="/enregistrer_achat" target="content-frame">Enregister Achat</a></li>
-                    <li><a href="/check_achat" target="content-frame">Historique Achat</a></li>
+                    <li><a href="/check_achat" target="content-frame">Payer Vendeur</a></li>
                     <li><a href="/bilan" target="content-frame">Bilan</a></li>
                 </ul>
             </div>
@@ -218,7 +220,7 @@
             <div class="sidebar-section" *ngIf="role === 'vendeur'">
                 <h3><a href="/contact" target="content-frame">VENDEUR</a></h3>
                 <ul>
-                    <li><a href="/R1" target="content-frame">MES JEUX</a></li>
+                    <li><a href="/vendeur" target="content-frame">TABLEAU DE BORD</a></li>
                 </ul>
             </div>
             <br>

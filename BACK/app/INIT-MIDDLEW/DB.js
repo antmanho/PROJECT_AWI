@@ -7,14 +7,21 @@
 //-----------------------------------------------------------------------------------
 const mysql = require('mysql');
 
+//const db = mysql.createConnection({
+//    host: 'localhost',
+//    user: 'root',
+//    password: 'root',
+//    database: 'BDR',
+//    socketPath: '../../../../../../../Applications/MAMP/tmp/mysql/mysql.sock'
+//});
+// Configuration de la connexion à la base de données MySQL
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'BDR',
-    socketPath: '../../../../../../../Applications/MAMP/tmp/mysql/mysql.sock'
+    socketPath: '../../../../var/run/mysqld/mysqld.sock'
 });
-
 // Connectez-vous à la base de données
 db.connect((err) => {
     if (err) {

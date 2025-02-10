@@ -1,59 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ServiceGestionnaireService, Vente } from '../Services/service-gestionnaire.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // Importer CommonModule
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-payer-vendeur-liste',
   standalone: true,
   templateUrl: './payer-vendeur-liste.component.html',
   styleUrls: ['./payer-vendeur-liste.component.css'],
-  imports: [FormsModule, CommonModule] // Ajouter CommonModule ici
+  imports: [FormsModule, CommonModule]
 })
 export class PayerVendeurListeComponent implements OnInit {
   emailVendeur: string = "";
-  historiqueVentes: any[] = [];
+  historiqueVentes: Vente[] = [];
+  showNotification = false;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private serviceGestionnaire: ServiceGestionnaireService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.emailVendeur = params['email'];
       this.fetchHistoriqueVentes();
+      
     });
   }
 
-    fetchHistoriqueVentes() {
-      this.http.get<any[]>(`http://localhost:3000/historique-vente/${this.emailVendeur}`).subscribe(data => {
-        // Supposons que 'data' est un tableau d'objets avec la somme
+  fetchHistoriqueVentes() {
+    this.serviceGestionnaire.fetchHistoriqueVentes(this.emailVendeur).subscribe(
+      data => {
         this.historiqueVentes = data;
-
-        // Vous pouvez récupérer la somme totale ici si nécessaire, ou simplement l'afficher directement
-      }, error => {
+          console.log(this.historiqueVentes);
+      },
+      error => {
         console.error('Erreur lors de la récupération des ventes:', error);
-      });
-    }
+      }
+    );
+  }
 
   redirectToHistorique(email: string) {
     this.router.navigate([`/historique-vente`, email]);
   }
 
-    onSubmit() {
-        const payload = { email: this.emailVendeur };
+  onSubmit() {
+    this.serviceGestionnaire.payerVendeur(this.emailVendeur).subscribe({
+      next: (response) => {
+          // Rafraîchir la page après l'envoi des données
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Ajoute une animation fluide
+          });
 
-        this.http.post<{ message: string, refresh: boolean }>('http://localhost:3000/payer-vendeur-liste', payload)
-            .subscribe({
-                next: (response) => {
-                    console.log(response.message); // Affichez le message de succès
-                    if (response.refresh) {
-                        window.location.reload(); // Rafraîchissez la page si "refresh" est vrai
-                    }
-                },
-                error: (error) => {
-                    console.error('Erreur lors de la mise à jour:', error);
-                }
-            });
+          this.showNotification = true;
+          setTimeout(() => this.showNotification = false, 5000);
+        console.log(response.message);
+          // Rafraîchit la page après 5 secondes
+              setTimeout(() => {
+                  window.location.reload();
+              }, 5000);
+        
+          
+      },
+      error: (error) => {
+        console.error('Erreur lors de la mise à jour:', error);
+      }
+    });
+  }
+    closeNotification() {
+      this.showNotification = false;
     }
-
 }

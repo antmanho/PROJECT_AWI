@@ -1,46 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
 import { CommonModule } from '@angular/common';
+
+import { Component, OnInit } from '@angular/core';
+import { ServiceAllService } from '../Services/service-all.service'; // Make sure the path is correct
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  templateUrl: './root.component.html',
+  templateUrl: './root.component.html', // Update the template as needed
   styleUrls: ['./root.component.css'],
-  imports: [CommonModule]
+imports: [CommonModule]
 })
 export class Droot implements OnInit {
   emailConnecte: string | null = null;
-  role: string | null = null; // Variable pour stocker le rôle de l'utilisateur
+  role: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private service: ServiceAllService) {}
 
-  ngOnInit() {
-      // Initialiser la session à l'aide d'une requête GET
-      this.http.get<{ situation: string, email_connecte: string }>('http://localhost:3000/root', { withCredentials: true })
-        .subscribe({
-          next: (response) => {
-            console.log('Session initialisée:', response);
-            // Vous pouvez définir l'email connecté ici si nécessaire
-            this.emailConnecte = response.email_connecte; // Exemple d'assignation si la réponse contient l'email
-          },
-          error: (err) => {
-            console.error('Erreur lors de l\'initialisation de la session:', err);
-          }
-        });
-    this.http.get<{ email: string; role: string }>('http://localhost:3000/api/user-info', { withCredentials: true })
-      .subscribe({
-        next: (response) => {
-          this.emailConnecte = response.email; // Stocker l'email dans une variable
-          this.role = response.role; // Stocker le rôle dans une variable
-        },
-        error: (err) => {
-          console.error('Erreur lors de la récupération des informations utilisateur:', err);
-        }
-      });
+  ngOnInit(): void {
+    // Fetch user info on initialization
+    this.service.getUserInfo().subscribe({
+      next: (response) => {
+        this.emailConnecte = response.email;
+        this.role = response.role;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération des informations utilisateur:', err);
+      }
+    });
+  }
+
+  // Handle user logout
+  deconnexion(): void {
+    this.service.logout().subscribe({
+      next: (response) => {
+        console.log(response.message);
+        this.emailConnecte = 'invite@example.com'; // Reset local email
+        window.location.reload(); // Refresh the page
+      },
+      error: (err) => {
+        console.error('Erreur lors de la déconnexion:', err);
+      }
+    });
   }
 }
-
- 
-
- 

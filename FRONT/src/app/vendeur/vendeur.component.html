@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des tournois</title>
+    <style>
+        /* Assure le fond sur toute la fenêtre */
+        #bilan-container {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           min-height: 100vh;
+           background-color: #f5f5f5; /* Fond extérieur */
+         }
+
+         #bilan {
+           position: relative;
+           width: 100%;
+           padding: 2px;
+           border-radius: 10px;
+           text-align: center;
+           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+         }
+
+         #bilan::before {
+           content: "";
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent */
+           z-index: -1;
+           border-radius: 10px;
+         }
+
+        
+         .form-group label {
+           display: block;
+         }
+
+        
+
+         input[type="text"],
+         input[type="number"] {
+           width: 80%;
+           padding: 10px;
+           margin-top: 10px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           box-sizing: border-box;
+         }
+
+        button {
+          background-color: black;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          padding: 10px 20px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+         button:hover {
+           background-color: #0056b3;
+         }
+        html, body {
+            
+            height: 100%;
+            min-height: 100vh;
+            margin: 0;
+           
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            gap: 0px; /* Ajustez cette valeur pour diminuer l'espace entre les div */
+        }
+
+
+        /* Style pour centrer le titre */
+        .filter-title {
+            font-size: 5vw;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .info-button,
+        .star-button {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Styles pour les éléments spécifiques */
+        .cash-prize {
+            background-color: #FFDE0A;
+        }
+
+        /* Styles de la boîte modale */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 10px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Style pour le bouton de retour */
+        #back-to-top {
+            position: fixed;
+            top: 1px;
+            left: 1px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        /* Styles de recherche et réglage */
+        #search-button {
+            width: 5%;
+            height: 5.7vh;
+            background: url('IMAGE/rechercher.PNG') no-repeat center center;
+            background-size: contain;
+            border: none;
+            cursor: pointer;
+            text-indent: -9999px;
+            border-top: 2px solid black;
+            border-right: 2px solid black;
+            border-bottom: 2px solid black;
+        }
+
+        #reglage-button {
+            width: 5%;
+            height: 5vh;
+            background: url('IMAGE/reglage.PNG') no-repeat center center;
+            background-size: contain;
+            border: none;
+            cursor: pointer;
+            text-indent: -9999px;
+        }
+        
+        #catalogue {
+            text-align: center;
+        }
+      
+        h2 {
+               text-align: center;
+               border-top: 2px solid grey; /* Ligne noire au-dessus du titre */
+               padding-top: 10px; /* Espacement entre le titre et la ligne */
+               margin-top: 50px; /* Espacement entre la ligne et l'élément précédent */
+           }
+        h1 {
+               text-align: center;
+           }
+        .card {
+            display: inline-block;
+            background-color: white;
+            width: 200px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.1); /* Agrandir la carte de 10% lorsqu'elle est survolée */
+            z-index: 10; /* Assurez-vous que la carte survolée se place au-dessus des autres */
+        }
+        .card-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 10px;
+        }
+
+        .card-content h2 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .card-content p {
+            margin: 5px 0;
+        }
+        .no-link-style {
+          text-decoration: none; /* Supprime le souligné */
+          color: inherit; /* Hérite de la couleur du texte environnant */
+          font-weight: normal; /* Assure que le texte n'est pas en gras */
+        }
+
+        .no-link-style:hover {
+          text-decoration: none; /* Supprime le souligné au survol */
+          color: inherit; /* Maintient la couleur lors du survol */
+        }
+      
+
+      .switch {
+          position: relative;
+          display: inline-block;
+          width: 60px; /* Largeur du bouton bascule */
+          height: 34px; /* Hauteur du bouton bascule */
+          margin-left: 10px;
+      }
+      
+      .switch input {
+          opacity: 0; /* Rendre le checkbox invisible */
+          width: 0;
+          height: 0;
+      }
+
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc; /* Couleur de fond par défaut */
+          transition: .4s;
+          border-radius: 34px; /* Arrondir les coins */
+      }
+
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 26px; /* Hauteur du cercle */
+          width: 26px; /* Largeur du cercle */
+          left: 4px; /* Position initiale */
+          bottom: 4px;
+          background-color: white; /* Couleur du cercle */
+          border-radius: 50%; /* Cercle */
+          transition: .4s;
+      }
+
+      input:checked + .slider {
+          background-color: grey; /* Couleur de fond lorsque coché */
+      }
+
+      input:checked + .slider:before {
+          transform: translateX(26px); /* Déplacement du cercle */
+      }
+        form.form-group {
+          display: flex;
+          flex-direction: column; /* Aligne les éléments en colonne */
+          gap: 20px; /* Ajoute un espace entre chaque élément */
+          align-items: center; /* Centre les éléments horizontalement */
+          width: 80%; /* Limite la largeur à 80% de l'écran */
+          margin: 0 auto; /* Centre le formulaire horizontalement */
+          background-color:  #f4f4f4; /* Fond blanc */
+          padding: 20px; /* Espace intérieur autour des éléments */
+          border: 1px solid #ddd; /* Bordure gris clair autour du formulaire */
+          border-radius: 10px; /* Coins arrondis */
+        }
+
+
+        .checkbox-large {
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+
+        /* Styles pour le switch */
+      
+        
+        .switch input {
+            opacity: 0; /* Rendre le checkbox invisible */
+            width: 0;
+            height: 0;
+        }
+        .switch-container {
+          display: flex;
+          align-items: center; /* Aligne les éléments verticalement au centre */
+          gap: 10px; /* Ajoute un petit espace entre les éléments */
+        }
+    </style>
+</head>
+<body>
+        
+        <h1>MON TABLEAU DE BORD</h1>
+
+    <div class="main-container">
+        <!-- Catalogue des jeux en vente -->
+       
+       <h2>VOIR BILAN PERSONNEL</h2>
+       <form class="form-group">
+           <div class="switch-container">
+             <label for="sessionParticuliere">Toutes les sessions</label>
+             <label class="switch">
+               <input
+                 type="checkbox"
+                 [(ngModel)]="sessionParticuliere"
+                 name="sessionParticuliere"
+                 (change)="toggleSwitch()"
+               />
+               <span class="slider"></span>
+             </label>
+             <label>&nbsp;Session particulière</label>
+           </div>
+
+           <div *ngIf="sessionParticuliere" style="margin-left: 15%; width: 80%">
+             <input
+               type="number"
+               id="numeroSession"
+               name="numeroSession"
+               [(ngModel)]="numeroSession"
+               
+               placeholder="Entrez le numéro de session"
+             />
+           </div>
+
+           <div *ngIf="!sessionParticuliere">
+             <br /><br />
+           </div>
+
+
+         <input
+           type="number"
+           id="chargesFixes"
+           name="chargesFixes"
+           [(ngModel)]="chargesFixes"
+           style="margin-left: 2%; width: 80%"
+           placeholder="Entrez les charges fixes"
+         />
+         <br><br>
+
+         <button (click)="viewBilan()" style="margin-left: 2%; width: 80%">
+           Voir le Bilan
+         </button>
+       </form>
+       <h2>MES JEUX VENDUS</h2>
+
+       <!-- Vérification si les jeux vendus sont vides -->
+       <div *ngIf="soldGames.length === 0" style="text-align: center; font-size: 1.5em; color: #888;">
+           Vous n'avez pas encore vendu de jeux.
+       </div>
+
+       <div *ngIf="soldGames.length > 0">
+           <div id="sold-games">
+               <div *ngFor="let soldGame of soldGames" class="card">
+                   <h2>{{ soldGame.nom_jeu }}</h2>
+                   <img [src]="'http://localhost:3000' + soldGame.photo_path" alt="Image du jeu {{ soldGame.nom_jeu }}" class="card-image" />
+                   <div class="card-content">
+                       <p>Prix : {{ soldGame.Prix_unit }} €</p>
+                       <p>Quantité vendue : {{ soldGame.Quantite_vendu }}</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+  
+        <div id="catalogue">
+            <h2>MES JEUX DEPOSES</h2>
+            
+            <!-- Vérification si le catalogue est vide -->
+            <div *ngIf="games.length === 0" style="text-align: center; font-size: 1.5em; color: #888;">
+                Vous n'avez pas encore déposé de jeux en vente.
+            </div>
+
+            <div *ngIf="games.length > 0">
+                <div *ngFor="let game of games" class="card">
+                    <a [routerLink]="['/detail-article', game.id_stock]" class="no-link-style">
+                        <h2>{{ game.nom_jeu }}</h2>
+                        <img [src]="'http://localhost:3000' + game.photo_path" alt="Image du jeu {{ game.nom_jeu }}" class="card-image" />
+                        <div class="card-content">
+                            <p>N°article : {{ game.id_stock }}</p>
+                            <p>------------------------</p>
+                            <p>{{ game.prix_final }} €</p>
+                            <p>Est en vente : {{ game.est_en_vente_label }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+  
+    </div>
