@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+
+    color: #721c24;
+    text-align: center;
+    padding: 50px;
+}
+h1 {
+    font-size: 2.5em;
+}
+p {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+.message {
+    background-color: #f5c6cb;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 20px;
+}
+.image {
+    margin-top: 30px;
+    width: 50%;
+    max-width: 400px;
+}

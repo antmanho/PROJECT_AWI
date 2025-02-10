@@ -1,0 +1,121 @@
+    .header {
+    position: relative;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+.notification {
+    padding: 20px;
+    background-color: #f0f9eb;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.close-btn {
+    background: none;
+    border: none;
+    color: #155724;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+
+.optional-fields {
+    display: none;
+}
+.toggle-button {
+    cursor: pointer;
+    user-select: none;
+}
+
+.centered-button {
+    width: 30%;
+    height: 10%;
+    font-size: 3vw;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#m_tournois {
+width: 10%; /* Définissez la largeur selon vos besoins */
+height: 7vh; /* Ajustez la hauteur en fonction de la hauteur de la fenêtre */
+}
+#h_tournois {
+width: 10%; /* Définissez la largeur selon vos besoins */
+height: 7vh; /* Ajustez la hauteur en fonction de la hauteur de la fenêtre */
+}
+#date_tournois {
+width: 60%; /* Définissez la largeur selon vos besoins */
+height: 7vh; /* Ajustez la hauteur en fonction de la hauteur de la fenêtre */
+}
+body {
+    margin: 0; /* Supprime les marges par défaut */
+    padding: 0; /* Supprime les padding par défaut */
+    height: 100vh; /* Définit la hauteur à 100% de la hauteur de la fenêtre */
+    position: relative; /* Position relative pour les enfants */
+    background-image: url('IMAGE/sport.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre toute la fenêtre */
+    background-position: center; /* Centre l'image de fond */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image de fond */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.90); /* Couleur d'arrière-plan semi-transparente */
+    z-index: -1; /* Place cette couche derrière le contenu de la page */
+}
+.custom-select {
+    appearance: none; /* Supprime le style par défaut */
+    -webkit-appearance: none; /* Pour les navigateurs basés sur WebKit */
+    -moz-appearance: none; /* Pour les navigateurs basés sur Gecko */
+    width: 10%; /* Définissez la largeur selon vos besoins */
+    height: 5vh; /* Ajustez la hauteur en fonction de la hauteur de la fenêtre */
+    padding: 10px; /* Ajoutez un peu de rembourrage */
+    border: 1px solid #000; /* Ajoutez une bordure */
+    background-color: #fff; /* Fond blanc */
+    color: #000; /* Texte noir */
+    font-size: 16px; /* Taille de police */
+    cursor: pointer; /* Curseur */
+}
+
+/* Styles spécifiques au survol */
+
+
+/* Styles spécifiques au focus */
+.custom-select:focus {
+    outline: none; /* Supprimez la bordure lorsqu'il est en focus */
+}
+    h1 {
+font-size: 4vw;
+text-align: center;
+margin: 0 auto; /* Pour centrer horizontalement */
+}
+input {
+        width: 50%;
+        height: 4vh;
+    font-size: 2vw;
+
+}
+.form-group {
+    display: flex; /* Utilise Flexbox pour aligner l'étiquette et la case à cocher */
+    align-items: center; /* Centre verticalement */
+    margin-bottom: 15px; /* Espace entre les groupes de champs */
+}
+
+.checkbox-large {
+    width: 30px; /* Ajuste la largeur de la case à cocher */
+    height: 30px; /* Ajuste la hauteur de la case à cocher */
+    margin-left: 10px; /* Espace à gauche de la case à cocher */
+}
