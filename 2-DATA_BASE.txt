@@ -18,9 +18,11 @@ INSERT INTO Historique_Depot (email_vendeur, nom_jeu, Prix_unit, photo_path, num
 ('vendeur1@example.com', 'Monopoly', 20, '/IMAGE/Monopoly.JPG', 1, 10),
 ('vendeur2@example.com', 'Catan', 25, '/IMAGE/Catan.JPG', 1, 5),
 ('vendeur1@example.com', 'Risk', 15, '/IMAGE/Risk.JPG', 2, 3),
-('vendeur3@example.com', 'Carcassonne', 30, '/IMAGE/Carcassonne.JPG', 2, 8);
+('vendeur3@example.com', 'Uno', 15, '/IMAGE/Uno.JPG', 1, 10),
+('vendeur4@example.com', 'Cluedo', 30, '/IMAGE/Cluedo.JPG', 2, 8),
+('vendeur5@example.com', 'Times Up', 25, '/IMAGE/TimeUp.JPG', 2, 6);
 
--- Table Historique_Vente
+-- Table Historique_Vente (VIDE)
 CREATE TABLE Historique_Vente (
   id_vente INT AUTO_INCREMENT PRIMARY KEY,
   email_vendeur VARCHAR(255),
@@ -31,12 +33,6 @@ CREATE TABLE Historique_Vente (
   Quantite_vendu INT,
   vendeur_paye TINYINT(1)
 );
-
-INSERT INTO Historique_Vente (email_vendeur, nom_jeu, Prix_unit, photo_path, numero_session_vente, Quantite_vendu, vendeur_paye) VALUES
-('vendeur1@example.com', 'Monopoly', 20, '/IMAGE/Monopoly.JPG', 1, 5, 1),
-('vendeur2@example.com', 'Catan', 25, '/IMAGE/Catan.JPG', 1, 2, 0),
-('vendeur1@example.com', 'Risk', 15, '/IMAGE/Risk.JPG', 2, 1, 1),
-('vendeur3@example.com', 'Carcassonne', 30, '/IMAGE/Carcassonne.JPG', 2, 4, 0);
 
 -- Table role_preinscription
 CREATE TABLE role_preinscription (
@@ -62,7 +58,7 @@ INSERT INTO Session (Nom_session, adresse_session, date_debut, date_fin, Charge_
 ('Session Automne', '10 Rue du Jeu, Ville', '2023-09-01', '2023-09-30', 100, 10, 5, 'Session de vente pour l''automne.'),
 ('Session Hiver', '15 Avenue des Joueurs, Ville', '2023-12-01', '2023-12-31', 150, 15, 7, 'Session de vente pour l''hiver.');
 
--- Table Stock
+-- Table Stock (Les quantités sont identiques à Historique_Depot)
 CREATE TABLE Stock (
   id_stock INT AUTO_INCREMENT PRIMARY KEY,
   email_vendeur VARCHAR(255),
@@ -77,8 +73,12 @@ CREATE TABLE Stock (
 );
 
 INSERT INTO Stock (email_vendeur, nom_jeu, Prix_unit, numero_session_actuelle, Quantite_actuelle, est_en_vente, photo_path, editeur, Description) VALUES
-('vendeur1@example.com', 'Monopoly', 20, 1, 4, 1, '/IMAGE/Monopoly.JPG', 'Hasbro', 'Un jeu de société classique.'),
-('vendeur2@example.com', 'Catan', 25, 1, 5, 1, '/IMAGE/Catan.JPG', 'Kosmos', 'Un jeu de stratégie apprécié.');
+('vendeur1@example.com', 'Monopoly', 20, 1, 10, 1, '/IMAGE/Monopoly.JPG', 'Hasbro', 'Un jeu de société classique.'),
+('vendeur2@example.com', 'Catan', 25, 1, 5, 1, '/IMAGE/Catan.JPG', 'Kosmos', 'Un jeu de stratégie apprécié.'),
+('vendeur1@example.com', 'Risk', 15, 2, 3, 1, '/IMAGE/Risk.JPG', 'Hasbro', 'Un jeu de conquête et de stratégie.'),
+('vendeur3@example.com', 'Uno', 15, 1, 10, 1, '/IMAGE/Uno.JPG', 'Mattel', 'Un jeu de cartes familial classique.'),
+('vendeur4@example.com', 'Cluedo', 30, 2, 8, 1, '/IMAGE/Cluedo.JPG', 'Hasbro', 'Un jeu d''enquête et de mystère.'),
+('vendeur5@example.com', 'Times Up', 25, 2, 6, 1, '/IMAGE/TimeUp.JPG', 'Repos Production', 'Un jeu d''ambiance et de rapidité.');
 
 -- Table Users
 CREATE TABLE Users (
@@ -104,4 +104,3 @@ CREATE TABLE Verification_mail (
   Code VARCHAR(6) NOT NULL,
   Password VARCHAR(255) NOT NULL
 );
-
