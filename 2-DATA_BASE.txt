@@ -1,4 +1,5 @@
 Toute la base de donnée est accessible via une belle interface sur http://81.64.168.138/phpmyadmin/ le mot de passe est "fiorio" et le nom d'utilisateur est "admin"
+Toute la base de donnée est accessible via une belle interface sur http://81.64.168.138/phpmyadmin/ le mot de passe est "fiorio" et le nom d'utilisateur est "admin"
 
 CREATE DATABASE BDR;
 USE BDR;
@@ -20,7 +21,10 @@ INSERT INTO Historique_Depot (email_vendeur, nom_jeu, Prix_unit, photo_path, num
 ('vendeur1@example.com', 'Risk', 15, '/IMAGE/Risk.JPG', 2, 3),
 ('vendeur3@example.com', 'Uno', 15, '/IMAGE/Uno.JPG', 1, 10),
 ('vendeur4@example.com', 'Cluedo', 30, '/IMAGE/Cluedo.JPG', 2, 8),
-('vendeur5@example.com', 'Times Up', 25, '/IMAGE/TimeUp.JPG', 2, 6);
+('vendeur5@example.com', 'Times Up', 25, '/IMAGE/TimeUp.JPG', 2, 6),
+('vendeur6@example.com', 'Qui est-ce ?', 20, '/IMAGE/QuiEstCe.JPG', 1, 7),
+('vendeur7@example.com', 'Jungle Speed', 18, '/IMAGE/JungleSpeed.JPG', 2, 9);
+
 
 -- Table Historique_Vente (VIDE)
 CREATE TABLE Historique_Vente (
@@ -78,7 +82,10 @@ INSERT INTO Stock (email_vendeur, nom_jeu, Prix_unit, numero_session_actuelle, Q
 ('vendeur1@example.com', 'Risk', 15, 2, 3, 1, '/IMAGE/Risk.JPG', 'Hasbro', 'Un jeu de conquête et de stratégie.'),
 ('vendeur3@example.com', 'Uno', 15, 1, 10, 1, '/IMAGE/Uno.JPG', 'Mattel', 'Un jeu de cartes familial classique.'),
 ('vendeur4@example.com', 'Cluedo', 30, 2, 8, 1, '/IMAGE/Cluedo.JPG', 'Hasbro', 'Un jeu d''enquête et de mystère.'),
-('vendeur5@example.com', 'Times Up', 25, 2, 6, 1, '/IMAGE/TimeUp.JPG', 'Repos Production', 'Un jeu d''ambiance et de rapidité.');
+('vendeur5@example.com', 'Times Up', 25, 2, 6, 1, '/IMAGE/TimeUp.JPG', 'Repos Production', 'Un jeu d''ambiance et de rapidité.'),
+('vendeur6@example.com', 'Qui est-ce ?', 20, 1, 7, 1, '/IMAGE/QuiEstCe.JPG', 'Hasbro', 'Un jeu de devinettes amusant.'),
+('vendeur7@example.com', 'Jungle Speed', 18, 2, 9, 1, '/IMAGE/JungleSpeed.JPG', 'Zygomatic', 'Un jeu de réflexes et d''adresse.');
+
 
 -- Table Users
 CREATE TABLE Users (
